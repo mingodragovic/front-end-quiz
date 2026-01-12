@@ -1,19 +1,22 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from '@/lib/store/store'
-
-import { Question, QuizAnswer } from '@/lib/types/quiz.types'
-import {   fetchQuestions,
+import { 
+  fetchQuestions, 
+  submitQuiz as submitQuizAction,
   setCurrentQuestionIndex,
   setAnswer,
   clearAnswers,
-  submitQuiz as submitQuizAction } from '@/lib/store/quizSlice'
+  clearError
+} from '@/lib/store/quizSlice'
+import { QuizAnswer } from '@/lib/types/quiz.types'
+import { AppDispatch,RootState } from '@/lib/store/store'
 
 export function useQuiz() {
   const dispatch = useDispatch<AppDispatch>()
   const {
     questions,
-    isLoading: questionsLoading,
+    personalities,
+    isLoading,
     error: questionsError,
     currentQuestionIndex,
     answers,
@@ -24,17 +27,21 @@ export function useQuiz() {
 
   const [localError, setLocalError] = useState<string | null>(null)
 
+  // Fetch questions on mount
   useEffect(() => {
-    if (questions.length === 0) {
+    console.log('useQuiz - Questions length:', questions.length)
+    if (questions.length === 0 && !isLoading) {
+      console.log('useQuiz - Dispatching fetchQuestions')
       dispatch(fetchQuestions())
     }
-  }, [dispatch, questions.length])
+  }, [dispatch, questions.length, isLoading])
 
   const handleSetCurrentQuestionIndex = useCallback((index: number) => {
     dispatch(setCurrentQuestionIndex(index))
   }, [dispatch])
 
   const handleSetAnswer = useCallback((questionId: number, optionId: number) => {
+    console.log('Setting answer:', { questionId, optionId })
     dispatch(setAnswer({ questionId, optionId }))
   }, [dispatch])
 
@@ -44,29 +51,43 @@ export function useQuiz() {
 
   const handleSubmitQuiz = useCallback(async (): Promise<any> => {
     try {
+      console.log('Submitting quiz with answers:', answers)
+      
       if (answers.length !== questions.length) {
-        throw new Error('Please answer all questions before submitting')
+        const error = `Please answer all questions before submitting (${answers.length}/${questions.length})`
+        setLocalError(error)
+        throw new Error(error)
       }
 
       const result = await dispatch(submitQuizAction(answers)).unwrap()
+      console.log('Quiz submitted successfully:', result)
       return result
     } catch (error) {
-      setLocalError(error instanceof Error ? error.message : 'Failed to submit quiz')
+      console.error('Quiz submission error:', error)
+      const errorMessage = error instanceof Error ? error.message : 'Failed to submit quiz'
+      setLocalError(errorMessage)
       throw error
     }
   }, [dispatch, answers, questions.length])
 
+  const handleClearErrors = useCallback(() => {
+    setLocalError(null)
+    dispatch(clearError())
+  }, [dispatch])
+
   return {
     questions,
-    isLoading: questionsLoading,
+    personalities,
+    isLoading,
     error: localError || questionsError || submissionError,
     currentQuestionIndex,
-    answers,
     setCurrentQuestionIndex: handleSetCurrentQuestionIndex,
+    answers,
     setAnswer: handleSetAnswer,
     clearAnswers: handleClearAnswers,
     submitQuiz: handleSubmitQuiz,
     isSubmitting,
-    quizResult
+    quizResult,
+    clearErrors: handleClearErrors
   }
 }

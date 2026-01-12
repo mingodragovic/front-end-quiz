@@ -58,7 +58,7 @@ export function QuizScreen({ onQuizSubmitSuccess, onError }: QuizScreenProps) {
         <div className="max-w-3xl mx-auto text-center">
           <ParadoxLogo size="md" className="mb-8" />
           <Card className="p-8">
-            <p className="text-lg text-destructive">
+         <p className="text-lg text-destructive">
               Failed to load quiz questions. Please try again later.
             </p>
           </Card>
