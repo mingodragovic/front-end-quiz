@@ -21,7 +21,8 @@ export function RecentAttemptsScreen({ onViewDetails, onError }: RecentAttemptsS
 
   useEffect(() => {
     if (error) {
-      onError(error)
+      const errorMessage = error instanceof Error ? error.message : String(error)
+      onError(errorMessage)
     }
   }, [error, onError])
 
@@ -94,7 +95,6 @@ export function RecentAttemptsScreen({ onViewDetails, onError }: RecentAttemptsS
                     <TableHead>Personality Result</TableHead>
                     <TableHead>Score</TableHead>
                     <TableHead>Date & Time</TableHead>
-                    <TableHead className="text-right">Actions</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -132,17 +132,7 @@ export function RecentAttemptsScreen({ onViewDetails, onError }: RecentAttemptsS
                             {formatDate(attempt.createdAt)}
                           </div>
                         </TableCell>
-                        <TableCell className="text-right">
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => onViewDetails(attempt.id)}
-                            className="gap-2"
-                          >
-                            <Eye className="w-4 h-4" />
-                            View
-                          </Button>
-                        </TableCell>
+                   
                       </TableRow>
                     )
                   })}

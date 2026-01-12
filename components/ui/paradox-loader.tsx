@@ -18,35 +18,29 @@ export function ParadoxLoader({ size = 'md' }: ParadoxLoaderProps) {
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          {/* Outer circle */}
+          {/* Outer circle - properly sized and positioned */}
           <circle
             cx="24"
             cy="24"
-            r="20"
+            r="15" // Reduced radius to better wrap around the X
             stroke="currentColor"
             strokeWidth="2"
-            strokeDasharray="4 4"
-            className="text-primary animate-spin-slow opacity-30"
+            strokeDasharray="3 3"
+            className="text-primary animate-spin opacity-40"
+            style={{ transformOrigin: 'center' }}
           />
           
-          {/* Inner path */}
+          {/* Inner X shape - corrected to stay within the circle */}
           <path
-            d="M 14 14 L 24 24 L 14 34 M 34 14 L 24 24 L 34 34"
+            d="M 16 16 L 24 24 L 16 32 M 32 16 L 24 24 L 32 32"
             stroke="currentColor"
-            strokeWidth="3"
+            strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
             className="text-primary animate-pulse"
           />
           
-          {/* Center circle */}
-          <circle
-            cx="24"
-            cy="24"
-            r="4"
-            fill="currentColor"
-            className="text-primary"
-          />
+         
         </svg>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { 
-  fetchQuestions, 
+import {
+  fetchQuestions,
   submitQuiz as submitQuizAction,
   setCurrentQuestionIndex,
   setAnswer,
@@ -9,7 +9,7 @@ import {
   clearError
 } from '@/lib/store/quizSlice'
 import { QuizAnswer } from '@/lib/types/quiz.types'
-import { AppDispatch,RootState } from '@/lib/store/store'
+import { AppDispatch, RootState } from '@/lib/store/store'
 
 export function useQuiz() {
   const dispatch = useDispatch<AppDispatch>()
@@ -49,17 +49,21 @@ export function useQuiz() {
     dispatch(clearAnswers())
   }, [dispatch])
 
-  const handleSubmitQuiz = useCallback(async (): Promise<any> => {
+  // FIXED: Accept answers parameter to avoid race condition
+  const handleSubmitQuiz = useCallback(async (answersToSubmit?: QuizAnswer[]): Promise<any> => {
     try {
-      console.log('Submitting quiz with answers:', answers)
+      // Use provided answers or fall back to Redux state
+      const finalAnswers = answersToSubmit || answers
       
-      if (answers.length !== questions.length) {
-        const error = `Please answer all questions before submitting (${answers.length}/${questions.length})`
+      console.log('Submitting quiz with answers:', finalAnswers)
+      
+      if (finalAnswers.length !== questions.length) {
+        const error = `Please answer all questions before submitting (${finalAnswers.length}/${questions.length})`
         setLocalError(error)
         throw new Error(error)
       }
 
-      const result = await dispatch(submitQuizAction(answers)).unwrap()
+      const result = await dispatch(submitQuizAction(finalAnswers)).unwrap()
       console.log('Quiz submitted successfully:', result)
       return result
     } catch (error) {
@@ -75,6 +79,14 @@ export function useQuiz() {
     dispatch(clearError())
   }, [dispatch])
 
+  // Complete quiz reset
+  const handleResetQuiz = useCallback(() => {
+    dispatch(clearAnswers())
+    dispatch(setCurrentQuestionIndex(0))
+    dispatch(clearError())
+    setLocalError(null)
+  }, [dispatch])
+
   return {
     questions,
     personalities,
@@ -85,6 +97,7 @@ export function useQuiz() {
     answers,
     setAnswer: handleSetAnswer,
     clearAnswers: handleClearAnswers,
+    resetQuiz: handleResetQuiz,
     submitQuiz: handleSubmitQuiz,
     isSubmitting,
     quizResult,

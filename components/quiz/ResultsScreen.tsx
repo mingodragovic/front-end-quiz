@@ -20,6 +20,7 @@ import {
 } from 'recharts'
 import { QuizResult } from '@/lib/types/quiz.types'
 import { toast } from 'sonner'
+import { useQuiz } from '@/hooks/useQuiz'
 
 interface ResultsScreenProps {
   result: QuizResult
@@ -28,6 +29,8 @@ interface ResultsScreenProps {
 }
 
 export function ResultsScreen({ result, onRetake, onError }: ResultsScreenProps) {
+  const { resetQuiz } = useQuiz()
+  
   const winnerName = result.finalPersonality?.name || 'Unknown'
   const winnerDescription = result.finalPersonality?.description || ''
   
@@ -43,6 +46,13 @@ export function ResultsScreen({ result, onRetake, onError }: ResultsScreenProps)
     value: score.score,
     fill: personalityColorMap[score.name] || '#8d2146'
   }))
+
+  const handleRetakeQuiz = () => {
+    // Reset all quiz state
+    resetQuiz()
+    // Call parent callback to switch back to quiz view
+    onRetake()
+  }
 
   const handleShareResult = () => {
     if (result) {
@@ -145,9 +155,7 @@ export function ResultsScreen({ result, onRetake, onError }: ResultsScreenProps)
                 endAngle={-270}
               >
                 <RadialBar
-                  minAngle={15}
                   background
-                  clockWise
                   dataKey="value"
                 />
                 <Legend 
@@ -196,7 +204,7 @@ export function ResultsScreen({ result, onRetake, onError }: ResultsScreenProps)
 
         {/* Actions */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button onClick={onRetake} variant="outline" size="lg" className="gap-2">
+          <Button onClick={handleRetakeQuiz} variant="outline" size="lg" className="gap-2">
             <RotateCcw className="w-4 h-4" />
             Retake Quiz
           </Button>
