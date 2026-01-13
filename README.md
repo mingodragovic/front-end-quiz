@@ -1,36 +1,87 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Personality Quiz Platform - Frontend
 
-## Getting Started
+A modern, responsive personality quiz frontend built with Next.js, featuring real-time scoring visualization, attempt history, and seamless backend integration.
 
-First, run the development server:
+# Quick Links
+⦿ Live App: https://paradox-quiz.vercel.app
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+⦿ Backend API: https://personality-quiz-backend-eusl.onrender.com
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+⦿ API Docs: https://personality-quiz-backend-eusl.onrender.com/api
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+⦿ Repository: [Your GitHub Repo URL]
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Core Features
+⦿ Interactive Quiz: 5 questions with real-time progress tracking
 
-## Learn More
+⦿ Visual Results: Interactive charts showing personality score breakdown
 
-To learn more about Next.js, take a look at the following resources:
+⦿ Attempt History: Paginated view of all quiz attempts with statistics
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+⦿ Production Ready: Type-safe, optimized performance, comprehensive error handling
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+⦿ Mobile First: Fully responsive design for all devices
 
-## Deploy on Vercel
+# Tech Stack
+⦿ Frontend: Next.js 16 + React 19 + TypeScript
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+⦿ State Management: Redux Toolkit 2.5 + TanStack Query 5.5
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+⦿ UI & Styling: Tailwind CSS v4 + shadcn/ui components
+
+⦿ Visualization: Recharts 2.15 for data charts
+
+⦿ API Client: Axios 1.7 with interceptors
+
+⦿ Icons: Lucide React 0.469
+
+# Architecture
+⦿ Quiz Flow: Single-page navigation with progress tracking
+
+⦿ Results Display: Personality illustration, bar charts, radial charts
+
+⦿ History View: Paginated table with personality stats
+
+⦿ State Strategy: Redux for quiz flow, TanStack Query for attempts history
+
+# How It Works
+⦿ User completes 5-question personality quiz
+
+⦿ Frontend validates all answers before submission
+
+⦿ Backend calculates weighted scores with tie-breaking logic
+
+⦿ Results displayed with interactive visualizations
+
+⦿ All attempts stored and viewable in history
+
+# Deployment
+⦿ Frontend: Vercel 
+
+⦿ Backend: Render 
+
+⦿ Database: Neon 
+
+# Quick Test
+⦿ Visit the live app: https://paradox-quiz.vercel.app
+
+⦿ Complete the 5-question personality quiz
+
+⦿ View your results with interactive charts
+
+⦿ Check attempt history for previous quizzes
+
+# What This Demonstrates
+⦿ Modern frontend architecture with Next.js App Router
+
+⦿ Hybrid state management (Redux + TanStack Query)
+
+⦿ Type-safe development with TypeScript end-to-end
+
+⦿ Responsive design with mobile-first approach
+
+⦿ Production deployment with Vercel
+
+Seamless backend integration with real API
+
+Interactive data visualization with charts
