@@ -82,6 +82,6 @@ A modern, responsive personality quiz frontend built with Next.js, featuring rea
 
 ⦿ Production deployment with Vercel
 
-Seamless backend integration with real API
+⦿ Seamless backend integration with real API
 
-Interactive data visualization with charts
+⦿ Interactive data visualization with charts
