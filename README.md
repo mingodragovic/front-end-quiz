@@ -8,8 +8,8 @@ A modern, responsive personality quiz frontend built with Next.js, featuring rea
 ⦿ Backend API: [https://personality-quiz-backend-eusl.onrender.com](https://personality-quiz-backend-eusl.onrender.com)
 
 ⦿ API Docs: [https://personality-quiz-backend-eusl.onrender.com/api
-](https://personality-quiz-backend-eusl.onrender.com/api
-)
+](https://personality-quiz-backend-eusl.onrender.com/api)
+
 ⦿ Backend Repository: [[Your GitHub Repo URL]](https://github.com/mingodragovic/back-end-quiz)
 
 # Core Features
