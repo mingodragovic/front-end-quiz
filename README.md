@@ -5,11 +5,12 @@ A modern, responsive personality quiz frontend built with Next.js, featuring rea
 # Quick Links
 ⦿ Live App: https://paradox-quiz.vercel.app
 
-⦿ Backend API: https://personality-quiz-backend-eusl.onrender.com
+⦿ Backend API: [https://personality-quiz-backend-eusl.onrender.com](https://personality-quiz-backend-eusl.onrender.com)
 
-⦿ API Docs: https://personality-quiz-backend-eusl.onrender.com/api
-
-⦿ Repository: [Your GitHub Repo URL]
+⦿ API Docs: [https://personality-quiz-backend-eusl.onrender.com/api
+](https://personality-quiz-backend-eusl.onrender.com/api
+)
+⦿ Backend Repository: [[Your GitHub Repo URL]](https://github.com/mingodragovic/back-end-quiz)
 
 # Core Features
 ⦿ Interactive Quiz: 5 questions with real-time progress tracking
